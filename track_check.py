@@ -37,10 +37,11 @@ if our_files:   # check if we have an empty list
 
             file_keys = file.keys()
             key_to_find = "STENTU/h1"
-            print(file["STENTU/h1"])
 
+            tree = file[key_to_find]
+            nentries = tree.num_entries
+            print("Number of entries " + str(nentries))
 
 else:
     print("empty file list")
 
-print(our_files)
