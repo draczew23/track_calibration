@@ -42,6 +42,25 @@ if our_files:   # check if we have an empty list
             nentries = tree.num_entries
             print("Number of entries " + str(nentries))
 
+            pmodb = 0
+            eneb = 0
+            rhofh = np.zeros(2)
+            rhopca = np.zeros(2)
+            ptp = np.zeros(2)
+            pmodtr = np.zeros(2)
+            ephot = 0
+            asquared = 0
+            trkms = 0
+            psx = 0
+            psy = 0
+            psz = 0
+            ps4 = 0
+            q2 = 0
+
+            scaledown = 5
+            nn = nentries/scaledown
+            k = tree['pztr']
+            print(tree)
 else:
     print("empty file list")
 
