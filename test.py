@@ -40,8 +40,9 @@ pztr = np.empty((0, how_many))
 
 scaledown = 500000
 nn = int(nentries/scaledown)
+runnumber = np.array([])
 
-# Test histogram
+# Test
 hist = ROOT.TH1F("hist", "Histogram", int((bxmax-bxmin)/bxsize), int(bxmin), int(bxmax))
 
 for i in range(nn):
@@ -49,6 +50,7 @@ for i in range(nn):
     branch_pytr.GetEntry(i)
     branch_pztr.GetEntry(i)
     branch_Runnumber.GetEntry(i)
+
     runnumber = np.append(runnumber, branch_Runnumber.GetLeaf("Runnumber").GetValue(i))
 
     if BadRun_checker.is_bad_run(runnumber):
@@ -73,25 +75,75 @@ for i in range(nn):
 filter_ar = pxtr*pytr*pztr
 filter_ar_condition = filter_ar != 0
 
-k = np.array(pxtr[filter_ar_condition])
-l = np.array(pytr[filter_ar_condition])
-m = np.array(pztr[filter_ar_condition])
+pxtr_0 = np.array(pxtr[filter_ar_condition])
+pytr_0 = np.array(pytr[filter_ar_condition])
+pztr_0 = np.array(pztr[filter_ar_condition])
 
-plt.hist(k, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.hist(pxtr_0, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
 plt.savefig("pxtr_0.png")
 plt.clf()
 
-plt.hist(l, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)))
+plt.hist(pytr_0, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
 plt.savefig("pytr_0.png")
 
 plt.clf()
-plt.hist(m, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)))
+plt.hist(pztr_0, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
 plt.savefig("pztr_0.png")
 
-canvas = ROOT.TCanvas("canvas", "Histogram Canvas", 800, 600)
-hist.Draw()
-canvas.Update()
-canvas.SaveAs("test_histogram.png")
+# canvas = ROOT.TCanvas("canvas", "Histogram Canvas", 800, 600)
+# hist.Draw()
+# canvas.Update()
+# canvas.SaveAs("test_histogram.png")
+
+filter_ar_prim = pxtr[:, 0]*pytr[:, 0]*pztr[:, 0]
+filter_ar_condition = filter_ar_prim != 0
+
+pxtr_filt = pxtr[:, 0]
+pxtr_1 = pxtr_filt[filter_ar_condition]
+
+pytr_filt = pytr[:, 0]
+pytr_1 = pytr_filt[filter_ar_condition]
+
+pztr_filt = pztr[:, 0]
+pztr_1 = pztr_filt[filter_ar_condition]
+
+
+plt.clf()
+plt.hist(pxtr_1, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pxtr_1.png")
+
+plt.clf()
+plt.hist(pytr_1, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pytr_1.png")
+
+plt.clf()
+plt.hist(pztr_1, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pztr_1.png")
+
+filter_ar_prim = pxtr[:, 1]*pytr[:, 1]*pztr[:, 1]
+filter_ar_condition = filter_ar_prim != 0
+
+pxtr_filt = pxtr[:, 1]
+pxtr_2 = pxtr_filt[filter_ar_condition]
+
+pytr_filt = pytr[:, 1]
+pytr_2 = pytr_filt[filter_ar_condition]
+
+pztr_filt = pztr[:, 1]
+pztr_2 = pztr_filt[filter_ar_condition]
+
+plt.clf()
+plt.hist(pxtr_2, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pxtr_2.png")
+
+plt.clf()
+plt.hist(pytr_2, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pytr_2.png")
+
+plt.clf()
+plt.hist(pztr_2, bins=int((bxmax-bxmin)/bxsize), range=(int(bxmin), int(bxmax)), edgecolor='red', linewidth=1.5)
+plt.savefig("pztr_2.png")
+
 
 # plt.hist(k1, bins=int((bxmax-bxmin)/bxsize))
 # plt.hist(k1[:, 0], bins=int((bxmax-bxmin)/bxsize))
